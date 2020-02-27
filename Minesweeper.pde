@@ -2,7 +2,7 @@ import de.bezier.guido.*;
 
 public static final int NUM_ROWS = 12;
 public static final int NUM_COLS = 12;
-public static final int NUM_MINES = 25;
+public static final int NUM_MINES = NUM_ROWS;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> mines = new ArrayList <MSButton>(); //ArrayList of just the minesweeper buttons that are mined
 
@@ -84,20 +84,28 @@ public int countMines(int row, int col)
 {
     int numMines = 0;
     if (isValid(row, col)) {
-        if (isValid(row-1, col-1)) {
-            if (mines.contains(buttons[row-1][col-1])) numMines++;
-            if (mines.contains(buttons[row-1][col])) numMines++;
-            if (mines.contains(buttons[row][col-1])) numMines++;
-        }
-        if (isValid(row+1, col+1)) {
-            if (mines.contains(buttons[row+1][col+1])) numMines++;
-            if (mines.contains(buttons[row+1][col])) numMines++;
-            if (mines.contains(buttons[row][col+1])) numMines++;
-        }
-        if (isValid(row-1, col+1))
-            if (mines.contains(buttons[row-1][col+1])) numMines++;
-        if (isValid(row+1, col-1))
-            if (mines.contains(buttons[row+1][col-1])) numMines++;
+        // if (isValid(row-1, col-1)) {
+        //     if (mines.contains(buttons[row-1][col-1])) numMines++;
+        //     if (mines.contains(buttons[row-1][col])) numMines++;
+        //     if (mines.contains(buttons[row][col-1])) numMines++;
+        // }
+        // if (isValid(row+1, col+1)) {
+        //     if (mines.contains(buttons[row+1][col+1])) numMines++;
+        //     if (mines.contains(buttons[row+1][col])) numMines++;
+        //     if (mines.contains(buttons[row][col+1])) numMines++;
+        // }
+        // if (isValid(row-1, col+1))
+        //     if (mines.contains(buttons[row-1][col+1])) numMines++;
+        // if (isValid(row+1, col-1))
+        //     if (mines.contains(buttons[row+1][col-1])) numMines++;
+        if (isValid(row-1, col-1) && mines.contains(buttons[row-1][col-1])) numMines++;
+        if (isValid(row-1, col) && mines.contains(buttons[row-1][col])) numMines++;
+        if (isValid(row, col-1) && mines.contains(buttons[row][col-1])) numMines++;
+        if (isValid(row+1, col+1) && mines.contains(buttons[row+1][col+1])) numMines++;
+        if (isValid(row+1, col) && mines.contains(buttons[row+1][col])) numMines++;
+        if (isValid(row, col+1) && mines.contains(buttons[row][col+1])) numMines++;
+        if (isValid(row-1, col+1) && mines.contains(buttons[row-1][col+1])) numMines++;
+        if (isValid(row+1, col-1) && mines.contains(buttons[row+1][col-1])) numMines++;
     }
     return numMines;
 }
@@ -133,10 +141,11 @@ public class MSButton
             if (isValid(myRow, myCol+1) && !buttons[myRow][myCol+1].isClicked() && !mines.contains(buttons[myRow][myCol+1])) buttons[myRow][myCol+1].mousePressed();
             if (isValid(myRow-1, myCol) && !buttons[myRow-1][myCol].isClicked() && !mines.contains(buttons[myRow-1][myCol])) buttons[myRow-1][myCol].mousePressed();
             if (isValid(myRow+1, myCol) && !buttons[myRow+1][myCol].isClicked() && !mines.contains(buttons[myRow+1][myCol])) buttons[myRow+1][myCol].mousePressed();
-            if (isValid(myRow-1, myCol-1) && !buttons[myRow-1][myCol-1].isClicked() && !mines.contains(buttons[myRow-1][myCol-1])) buttons[myRow-1][myCol-1].mousePressed();
-            if (isValid(myRow-1, myCol+1) && !buttons[myRow-1][myCol+1].isClicked() && !mines.contains(buttons[myRow-1][myCol+1])) buttons[myRow-1][myCol+1].mousePressed();
-            if (isValid(myRow+1, myCol-1) && !buttons[myRow+1][myCol-1].isClicked() && !mines.contains(buttons[myRow+1][myCol-1])) buttons[myRow+1][myCol-1].mousePressed();
-            if (isValid(myRow+1, myCol+1) && !buttons[myRow+1][myCol+1].isClicked() && !mines.contains(buttons[myRow+1][myCol+1])) buttons[myRow+1][myCol+1].mousePressed();
+            // had this part in before, but i dont think you actually need it??
+            // if (isValid(myRow-1, myCol-1) && !buttons[myRow-1][myCol-1].isClicked() && !mines.contains(buttons[myRow-1][myCol-1])) buttons[myRow-1][myCol-1].mousePressed();
+            // if (isValid(myRow-1, myCol+1) && !buttons[myRow-1][myCol+1].isClicked() && !mines.contains(buttons[myRow-1][myCol+1])) buttons[myRow-1][myCol+1].mousePressed();
+            // if (isValid(myRow+1, myCol-1) && !buttons[myRow+1][myCol-1].isClicked() && !mines.contains(buttons[myRow+1][myCol-1])) buttons[myRow+1][myCol-1].mousePressed();
+            // if (isValid(myRow+1, myCol+1) && !buttons[myRow+1][myCol+1].isClicked() && !mines.contains(buttons[myRow+1][myCol+1])) buttons[myRow+1][myCol+1].mousePressed();
         }
     }
     public void draw () 
